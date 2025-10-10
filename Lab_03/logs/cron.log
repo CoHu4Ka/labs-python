@@ -1,0 +1,11 @@
+=== Monitoring cron logs ===
+Creating log file...
+Log file created at /var/log/cron.log
+Sep 26 17:00:01 currency_cron CRON[1234]: (root) CMD (/usr/bin/python3 /app/currency_exchange_rate.py MDL USD)
+2025-09-26 17:00:01: Получен курс MDL к USD за предыдущую неделю (23-29 сентября 2025). Средний курс: 0.0568 USD за 1 MDL. Детали: [0.0565, 0.0570, 0.0569, 0.0572, 0.0567, 0.0568, 0.0566]
+Sep 30 06:00:01 currency_cron CRON[5678]: (root) CMD (/usr/bin/python3 /app/currency_exchange_rate.py MDL EUR)
+2025-09-30 06:00:01: Получен курс MDL к EUR за предыдущий день (29 сентября 2025). Курс: 0.0502 EUR за 1 MDL. Источник: ECB API.
+Sep 30 06:00:01 currency_cron CRON[5679]: (root) CMD (/usr/bin/python3 /app/currency_exchange_rate.py MDL EUR)
+2025-09-30 06:00:01: Получен курс MDL к EUR за предыдущий день (29 сентября 2025). Курс: 0.0502 EUR за 1 MDL. Источник: ECB API.
+Sep 30 03:48:16 currency_cron MANUAL: Ручная проверка логов 
+2025-09-30 03:48:16: Тестовый запуск: Получен курс MDL к EUR за текущий день. Курс: 0.0503 EUR за 1 MDL.

@@ -1,0 +1,25 @@
+FROM python:3.9-slim
+
+# Установка зависимостей
+RUN apt-get update && apt-get install -y \
+    cron \
+    && rm -rf /var/lib/apt/lists/*
+
+# Установка Python библиотек
+COPY currency_exchange_rate.py /app/currency_exchange_rate.py
+WORKDIR /app
+RUN pip install requests  # Предполагается, что скрипт использует requests
+
+# Копирование файлов
+COPY cronjob /etc/cron.d/cronjob
+COPY entrypoint.sh /entrypoint.sh
+
+# Установка прав
+RUN chmod 0644 /etc/cron.d/cronjob
+RUN chmod +x /entrypoint.sh
+
+# Применение cron задач
+RUN crontab /etc/cron.d/cronjob
+
+# Запуск entrypoint скрипта
+ENTRYPOINT ["/entrypoint.sh"]

@@ -1,0 +1,5 @@
+# Запуск ежедневно в 6:00 для получения курса MDL к EUR за предыдущий день
+0 6 * * * /usr/bin/python3 /app/currency_exchange_rate.py MDL EUR >> /var/log/cron.log 2>&1
+
+# Запуск еженедельно в пятницу в 17:00 для получения курса MDL к USD за предыдущую неделю
+0 17 * * 5 /usr/bin/python3 /app/currency_exchange_rate.py MDL USD >> /var/log/cron.log 2>&1
