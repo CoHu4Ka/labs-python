@@ -1,0 +1,42 @@
+pipeline {
+    agent {
+        label 'php-agent'
+    }
+
+    environment {
+        COMPOSER_HOME = '/tmp'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/tvoy-login/php-example-with-tests.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'composer install --prefer-dist --no-progress --no-suggest'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                sh './vendor/bin/phpunit --testdox --colors=always'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Пайплайн завершён.'
+        }
+        success {
+            echo 'Все тесты прошли успешно!'
+        }
+        failure {
+            echo 'ОШИБКА: Пайплайн упал.'
+        }
+    }
+}
